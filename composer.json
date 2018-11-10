@@ -1,0 +1,11 @@
+{
+    "name": "nulldevelopmenthr/typhped",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Miro Svrtan",
+            "email": "miro@mirosvrtan.me"
+        }
+    ],
+    "require": {}
+}
