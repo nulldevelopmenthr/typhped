@@ -1,0 +1,118 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: msvrtan/square:0.2.2
+    working_directory: /var/www
+    parallel: 1
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: cache-v1-{{ checksum "composer.lock" }}
+
+      - run:
+          name: Disable xdebug
+          command: ./etc/circleci2/disable-xdebug.sh
+
+      - run:
+          name: Composer install
+          command: composer install --prefer-dist --no-interaction
+
+      - run:
+          name: PHPSpec
+          command: ./vendor/bin/phpspec run
+
+      - run:
+          name: PHPUnit
+          command: ./vendor/bin/phpunit
+
+      - run:
+          name: Behat
+          command: ./vendor/bin/behat --no-interaction --strict
+
+      - run:
+          name: PHPStan
+          command: ./vendor/bin/phing phpstan
+
+      - run:
+          name: Code standards
+          command: ./vendor/bin/phing check-codestandards
+
+      - save_cache:
+          key: cache-v1-{{ checksum "composer.lock" }}
+          paths:
+            - /var/www/vendor
+
+      - store_artifacts:
+          path: build
+          destination: build
+
+  infection:
+    docker:
+      - image: msvrtan/square:0.2.2
+    working_directory: /var/www
+    parallel: 1
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: cache-v1-{{ checksum "composer.lock" }}
+
+      - run:
+          name: Composer install
+          command: composer install --prefer-dist --no-interaction
+
+      - run:
+          name: Run infection
+          command: ./vendor/bin/infection
+
+      - store_artifacts:
+          path: build
+          destination: build
+
+  codecoverage_phpunit:
+    docker:
+      - image: msvrtan/square:0.2.2
+    working_directory: /var/www
+    parallel: 1
+    steps:
+      - checkout
+
+      - restore_cache:
+          key: cache-v1-{{ checksum "composer.lock" }}
+
+      - run:
+          name: Composer install
+          command: composer install --prefer-dist --no-interaction
+
+      - run:
+          name: PHPUnit
+          command: ./vendor/bin/phpunit
+
+      - run:
+          name: Ship codecoverage to codecov.io
+          command: bash <(curl -s https://codecov.io/bash)
+
+      - store_artifacts:
+          path: build
+          destination: build
+
+workflows:
+  version: 2
+  build-and-deploy:
+    jobs:
+      - build
+      - infection:
+          requires:
+            - build
+          filters:
+            branches:
+              only: quality_check
+      - codecoverage_phpunit:
+          requires:
+            - build
+          filters:
+            branches:
+              only: quality_check
