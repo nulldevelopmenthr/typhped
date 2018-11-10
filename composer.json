@@ -7,6 +7,17 @@
             "email": "miro@mirosvrtan.me"
         }
     ],
+    "autoload": {
+        "psr-0": {
+            "": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "spec\\": "spec/",
+            "Tests\\": "tests/"
+        }
+    },
     "require": {
         "webmozart/assert": "^1.3",
         "nikic/php-parser": "^4.1"
