@@ -22,23 +22,23 @@ jobs:
 
       - run:
           name: PHPSpec
-          command: ./vendor/bin/phpspec run
+          command: make spec
 
       - run:
           name: PHPUnit
-          command: ./vendor/bin/phpunit
+          command: make unit
 
       - run:
           name: Behat
-          command: ./vendor/bin/behat --no-interaction
+          command: make behat
 
       - run:
           name: PHPStan
-          command: ./vendor/bin/phing phpstan
+          command: make stan
 
       - run:
           name: Code standards
-          command: ./vendor/bin/phing check-codestandards
+          command: make cs-check
 
       - save_cache:
           key: cache-v1-{{ checksum "composer.lock" }}
@@ -89,7 +89,7 @@ jobs:
 
       - run:
           name: PHPUnit
-          command: ./vendor/bin/phpunit
+          command: make unit
 
       - run:
           name: Ship codecoverage to codecov.io
