@@ -28,7 +28,7 @@
         "behat/behat": "^3.5",
         "friendsofphp/php-cs-fixer": "^2.13",
         "ciaranmcnulty/phpspec-typehintedmethods": "^4.0",
-        "infection/infection": "^0.10.6",
+        "infection/infection": "^0.13.4",
         "mockery/mockery": "^1.2",
         "phpmd/phpmd": "^2.6",
         "phpstan/phpstan": "^0.10.5",
