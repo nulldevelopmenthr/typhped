@@ -1,4 +1,13 @@
 parameters:
+	featureToggles:
+		deadCatchesRule: true
+		missingReturnRule: true
+		noopRule: true
+		subtractableTypes: true
+		unreachableStatement: true
+		yieldRules: true
+		validateParameters: true
+		inferPrivatePropertyTypeFromConstructor: true
 	bootstrap: tests/bootstrap.php
 	excludes_analyse: []
 includes:
