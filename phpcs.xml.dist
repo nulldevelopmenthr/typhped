@@ -1,17 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ruleset name="pcsg-generated-ruleset">
-    <description>Created with the PHP Coding Standard Generator.
-        http://edorian.github.com/php-coding-standard-generator/
-    </description>
-    <exclude-pattern>*/cache/prod/*</exclude-pattern>
-    <exclude-pattern>*/cache/dev/*</exclude-pattern>
-    <exclude-pattern>*/cache/test/*</exclude-pattern>
-    <exclude-pattern>*/Migrations/*</exclude-pattern>
-    <exclude-pattern>*.js</exclude-pattern>
-    <exclude-pattern>*.css</exclude-pattern>
-    <config name="installed_paths"
-            value="vendor/slevomat/coding-standard/SlevomatCodingStandard"/><!-- relative path from PHPCS source location -->
-    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly"/>
+
+<ruleset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/squizlabs/php_codesniffer/phpcs.xsd">
+
+    <arg name="basepath" value="."/>
+    <arg name="cache" value=".phpcs-cache"/>
+    <arg name="colors"/>
+    <arg name="extensions" value="php"/>
 
     <rule ref="Generic.Classes.DuplicateClassName"/>
     <rule ref="Generic.CodeAnalysis.EmptyStatement"/>
@@ -32,12 +27,11 @@
     <rule ref="Generic.Files.LineEndings"/>
     <rule ref="Generic.Files.LineLength">
         <properties>
-            <property name="lineLimit" value="100"/>
+    		<property name="lineLimit" value="100"/>
             <property name="absoluteLineLimit" value="150"/>
 
         </properties>
         <exclude-pattern>*GitHubInstallationApplicationContext*</exclude-pattern>
-        <exclude-pattern>*src/App/DoctrineMigrations/*</exclude-pattern>
     </rule>
     <rule ref="Generic.Formatting.DisallowMultipleStatements"/>
     <rule ref="Generic.Formatting.MultipleStatementAlignment"/>
@@ -46,17 +40,7 @@
     <rule ref="Generic.Metrics.NestingLevel"/>
     <rule ref="Generic.NamingConventions.ConstructorName"/>
     <rule ref="Generic.NamingConventions.UpperCaseConstantName"/>
-    <rule ref="Generic.NamingConventions.CamelCapsFunctionName">
-        <exclude-pattern>src/DevboardLib/GitHub/Build/BuildStatus.php</exclude-pattern>
-        <exclude-pattern>src/DevboardLib/GitHub/Status/StatusState.php</exclude-pattern>
-        <exclude-pattern>tests/DataFixtures/Provider/GitHubBuildEntityProvider.php</exclude-pattern>
-        <exclude-pattern>tests/DataFixtures/Provider/GitHubBuildItemEntityProvider.php</exclude-pattern>
-        <exclude-pattern>tests/DataFixtures/Provider/GitHubBranchEntityProvider.php</exclude-pattern>
-        <exclude-pattern>tests/DataFixtures/Provider/GitHubRepoEntityProvider.php</exclude-pattern>
-        <exclude-pattern>tests/DataFixtures/Provider/GitHubTagEntityProvider.php</exclude-pattern>
-        <exclude-pattern>tests/DataFixtures/Provider/UntrackedGitHubRepoEntityProvider.php</exclude-pattern>
-        <exclude-pattern>tests/DataFixtures/Provider/TrackedGitHubRepoEntityProvider.php</exclude-pattern>
-    </rule>
+    <rule ref="Generic.NamingConventions.CamelCapsFunctionName"/>
     <rule ref="Generic.PHP.DeprecatedFunctions"/>
     <rule ref="Generic.PHP.DisallowShortOpenTag"/>
     <rule ref="Generic.PHP.ForbiddenFunctions"/>
@@ -94,4 +78,8 @@
     <rule ref="Squiz.Scope.MethodScope"/>
     <rule ref="Squiz.Scope.StaticThisUsage"/>
     <rule ref="Zend.Files.ClosingTag"/>
+
+    <file>src/</file>
+    <file>tests/</file>
+
 </ruleset>
