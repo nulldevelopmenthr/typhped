@@ -79,7 +79,7 @@
     <rule ref="Squiz.Scope.StaticThisUsage"/>
     <rule ref="Zend.Files.ClosingTag"/>
 
-    <file>src/</file>
-    <file>tests/</file>
+    <file>../src/</file>
+    <file>../tests/</file>
 
 </ruleset>

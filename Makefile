@@ -35,14 +35,14 @@ cs-check: ## Check for coding style violations
 
 
 stan: ## Run phpstan checks
-	vendor/bin/phpstan analyse -l 7 -c phpstan.neon src/ tests/
+	vendor/bin/phpstan analyse -l 7 -c etc/phpstan.neon src/ tests/
 
 codesniffer: ## Run php_codesniffer
-	vendor/bin/phpcs --standard=phpcs.xml.dist -n
+	vendor/bin/phpcs --standard=etc/phpcs.xml.dist -n
 
 phpcbf: ## Run phpcbf
-	vendor/bin/phpcbf --standard=phpcs.xml.dist -n
+	vendor/bin/phpcbf --standard=etc/phpcs.xml.dist -n
 
 mess-detector: ## Run php mess detector
-	vendor/bin/phpmd src text phpmd.xml
-	vendor/bin/phpmd tests text phpmd.xml
+	vendor/bin/phpmd src text etc/phpmd.xml
+	vendor/bin/phpmd tests text etc/phpmd.xml
