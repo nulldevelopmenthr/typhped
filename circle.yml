@@ -30,7 +30,7 @@ jobs:
 
       - run:
           name: Behat
-          command: ./vendor/bin/behat --no-interaction --strict
+          command: ./vendor/bin/behat --no-interaction
 
       - run:
           name: PHPStan
